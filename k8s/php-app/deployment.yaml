@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-todo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-todo
+  template:
+    metadata:
+      labels:
+        app: php-todo
+    spec:
+      containers:
+      - name: php-todo
+        image: abhi41/3tier_todo_app_web:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_NAME
+          value: simple_todo
+        - name: DB_USER
+          value: root
+        - name: DB_PASS
+          value: rootpassword
+
